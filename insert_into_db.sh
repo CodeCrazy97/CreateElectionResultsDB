@@ -17,19 +17,11 @@ echo "Below are the election results files. Data from each file will be collecte
 echo ""
 ls -lrt			# Display which elections are going to be considered.
 
-var1=""
-if [[ "b" == "b" ]]; then
-	var1="blah"
-fi
-echo $var1
-
-exit
-
 for RESULTFILES in $(ls)
 	do
 	
 	# Results variables.
-	electionYear=$(echo "$RESULTFILES" | cut -f 1 -d '.')
+	electionYear=$(echo "$RESULTFILES" | cut -f 1 -d '.')  # Gets the filename without the extension (results for the 2000 presidential election would be stored in a file named "2000.txt")
 	stateName=""
 	electoralVotes=""
 	popVotesC1=""
@@ -40,18 +32,35 @@ for RESULTFILES in $(ls)
 	echo "************************************************************"
 	echo "About to insert for the $electionYear election."
 	
+	
+	# Results for every state are stored on one line each.
 	while read p; do
+		counter=0  # Keeps track of which field we're looking at.
 		for r in $p 
 		do				
-			if [[ $stateName == "" ]]; then
-				$stateName = $p
+			# Results are stored in different fields.
+			if [[ $counter == 0 ]]; then
+				stateName=$r
+			elif [[ $counter == 1 ]]; then 
+				electoralVotes=$r
+			elif [[ $counter == 2 ]]; then
+				popVotesC1=$r
+			elif [[ $counter == 3 ]]; then
+				popVotesC2=$r
+			elif [[ $counter == 5 ]]; then  
+				totalVotes=$r									
 			fi
-		done	
+			counter=$((counter+1))
+		done
+		
+		totalVotes=${totalVotes//,/}  # Remove all the commas from the total number of votes.
+				
+		echo "INSERT INTO presidentialElections (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);"  # Display what is about to go to the db.
+		
+		# Login to the database and insert.
+		mysql -u root elections <<eof
+INSERT INTO presidentialElections (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);
+eof
+
 	done < "$RESULTFILES"
 done
-
-: '
-mysql -u root sms<<EOFMYSQL
-INSERT INTO presidentialElections (electionYear, state, electoralVotes, totalPopVotes) VALUES () * FROM messages WHERE message_text LIKE '%$s%';
-EOFMYSQL
-'
