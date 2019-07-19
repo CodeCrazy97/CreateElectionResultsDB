@@ -1,8 +1,3 @@
-: 'echo "show all tables"
-mysql -u root sms<<EOFMYSQL
-show tables;
-EOFMYSQL
-'
 
 ####################################################
 # This script will iterate over all the states and
@@ -35,9 +30,10 @@ for RESULTFILES in $(ls)
 	
 	# Results for every state are stored on one line each.
 	while read p; do
-		counter=0  # Keeps track of which field we're looking at.
+		counter=0  		# Keeps track of which field we're looking at.
+		
 		for r in $p 
-		do				
+		do				 
 			# Results are stored in different fields.
 			if [[ $counter == 0 ]]; then
 				stateName=$r
@@ -53,14 +49,17 @@ for RESULTFILES in $(ls)
 			counter=$((counter+1))
 		done
 		
-		totalVotes=${totalVotes//,/}  # Remove all the commas from the total number of votes.
-				
+		totalVotes=${totalVotes//,/}  	# Remove all the commas from the total number of votes.
+		stateName=${stateName^^}		# Capitalize the name of the state.
+		
+
 		echo "INSERT INTO presidentialElections (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);"  # Display what is about to go to the db.
 		
 		# Login to the database and insert.
 		mysql -u root elections <<eof
 INSERT INTO presidentialElections (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);
 eof
+
 
 	done < "$RESULTFILES"
 done
