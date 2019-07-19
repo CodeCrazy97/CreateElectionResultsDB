@@ -61,6 +61,7 @@ for RESULTFILES in $(ls)
 		# Will always send the overall election results to the database, regardless of what election year it is.
 		echo "INSERT INTO presidentialElections (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);"  # Display what is about to go to the db.
 		# Login to the database and insert.
+		
 		mysql -u root elections <<eof
 INSERT INTO presidentialElections (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);
 eof
@@ -117,12 +118,12 @@ INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('
 eof
 		elif [[ $electionYear == "2016" ]]; then
 			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Hillary Clinton', $popVotesC2, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Donal Trump', $popVotesC1, $electionYear, '$stateName');"				
+			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Donald Trump', $popVotesC1, $electionYear, '$stateName');"				
 			mysql -u root elections <<eof
 INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Hillary Clinton', $popVotesC2, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Donal Trump', $popVotesC1, $electionYear, '$stateName');
+INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Donald Trump', $popVotesC1, $electionYear, '$stateName');
 eof
 		fi
-		
+				
 	done < "$RESULTFILES"
 done
