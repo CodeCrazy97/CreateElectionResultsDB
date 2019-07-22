@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2019 at 05:09 PM
+-- Generation Time: Jul 22, 2019 at 05:04 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `candidates`
 --
+DROP DATABASE IF EXISTS elections;
 
 CREATE TABLE `candidates` (
   `candidateName` varchar(30) NOT NULL,
@@ -78,7 +79,7 @@ INSERT INTO `presidentialelections` (`electionYear`, `state`, `electoralVotes`, 
 (1992, 'CT', 8, 1616332),
 (1992, 'DC', 3, 227572),
 (1992, 'DE', 3, 289735),
-(1992, 'FL', 25, 1053067),
+(1992, 'FL', 25, 5314492),
 (1992, 'GA', 13, 2321125),
 (1992, 'HI', 4, 372842),
 (1992, 'IA', 7, 1354607),
@@ -119,6 +120,7 @@ INSERT INTO `presidentialelections` (`electionYear`, `state`, `electoralVotes`, 
 (1992, 'WA', 11, 2288228),
 (1992, 'WI', 11, 2531114),
 (1992, 'WV', 5, 683711),
+(1992, 'WY', 11, 200587),
 (1996, 'AK', 3, 241620),
 (1996, 'AL', 9, 1534349),
 (1996, 'AR', 6, 884262),
@@ -225,7 +227,7 @@ INSERT INTO `presidentialelections` (`electionYear`, `state`, `electoralVotes`, 
 (2000, 'WA', 11, 2487433),
 (2000, 'WI', 11, 2598607),
 (2000, 'WV', 5, 648124),
-(2000, 'WY', 3, 218351),
+(2000, 'WY', 3, 211571),
 (2004, 'AK', 3, 312598),
 (2004, 'AL', 9, 1883449),
 (2004, 'AR', 6, 1054945),
@@ -446,6 +448,7 @@ INSERT INTO `presidentialelections` (`electionYear`, `state`, `electoralVotes`, 
 (2016, 'UT', 6, 1131430),
 (2016, 'VA', 13, 3317019),
 (2016, 'VT', 3, 315067),
+(2016, 'WA', 8, 3317019),
 (2016, 'WI', 10, 2976150),
 (2016, 'WV', 5, 714423),
 (2016, 'WY', 3, 255849);
@@ -523,7 +526,7 @@ INSERT INTO `results` (`candidate`, `popVotesReceived`, `electionYear`, `state`)
 ('Al Gore', 1247652, 2000, 'WA'),
 ('Al Gore', 1242987, 2000, 'WI'),
 ('Al Gore', 295497, 2000, 'WV'),
-('Al Gore', 60481, 2000, 'WY'),
+('Al Gore', 77934, 2000, 'WY'),
 ('Barack Obama', 123594, 2008, 'AK'),
 ('Barack Obama', 813479, 2008, 'AL'),
 ('Barack Obama', 422310, 2008, 'AR'),
@@ -645,7 +648,7 @@ INSERT INTO `results` (`candidate`, `popVotesReceived`, `electionYear`, `state`)
 ('Bill Clinton', 682318, 1992, 'CT'),
 ('Bill Clinton', 192619, 1992, 'DC'),
 ('Bill Clinton', 126055, 1992, 'DE'),
-('Bill Clinton', 2072, 1992, 'FL'),
+('Bill Clinton', 2072798, 1992, 'FL'),
 ('Bill Clinton', 1008966, 1992, 'GA'),
 ('Bill Clinton', 179310, 1992, 'HI'),
 ('Bill Clinton', 586353, 1992, 'IA'),
@@ -686,6 +689,7 @@ INSERT INTO `results` (`candidate`, `popVotesReceived`, `electionYear`, `state`)
 ('Bill Clinton', 993039, 1992, 'WA'),
 ('Bill Clinton', 1041066, 1992, 'WI'),
 ('Bill Clinton', 331001, 1992, 'WV'),
+('Bill Clinton', 68160, 1992, 'WY'),
 ('Bill Clinton', 80380, 1996, 'AK'),
 ('Bill Clinton', 662165, 1996, 'AL'),
 ('Bill Clinton', 475171, 1996, 'AR'),
@@ -840,6 +844,7 @@ INSERT INTO `results` (`candidate`, `popVotesReceived`, `electionYear`, `state`)
 ('Donald Trump', 515231, 2016, 'UT'),
 ('Donald Trump', 1221747, 2016, 'VA'),
 ('Donald Trump', 95369, 2016, 'VT'),
+('Donald Trump', 1221747, 2016, 'WA'),
 ('Donald Trump', 1405284, 2016, 'WI'),
 ('Donald Trump', 489371, 2016, 'WV'),
 ('Donald Trump', 174419, 2016, 'WY'),
@@ -893,6 +898,7 @@ INSERT INTO `results` (`candidate`, `popVotesReceived`, `electionYear`, `state`)
 ('George Bush', 731235, 1992, 'WA'),
 ('George Bush', 930855, 1992, 'WI'),
 ('George Bush', 241974, 1992, 'WV'),
+('George Bush', 79347, 1992, 'WY'),
 ('George W. Bush', 167398, 2000, 'AK'),
 ('George W. Bush', 941173, 2000, 'AL'),
 ('George W. Bush', 472940, 2000, 'AR'),
@@ -948,7 +954,7 @@ INSERT INTO `results` (`candidate`, `popVotesReceived`, `electionYear`, `state`)
 ('George W. Bush', 1108864, 2000, 'WA'),
 ('George W. Bush', 1237279, 2000, 'WI'),
 ('George W. Bush', 336475, 2000, 'WV'),
-('George W. Bush', 147947, 2000, 'WY'),
+('George W. Bush', 105388, 2000, 'WY'),
 ('George W. Bush', 190889, 2004, 'AK'),
 ('George W. Bush', 1176394, 2004, 'AL'),
 ('George W. Bush', 572898, 2004, 'AR'),
@@ -1057,6 +1063,7 @@ INSERT INTO `results` (`candidate`, `popVotesReceived`, `electionYear`, `state`)
 ('Hillary Clinton', 310676, 2016, 'UT'),
 ('Hillary Clinton', 1742718, 2016, 'VA'),
 ('Hillary Clinton', 178573, 2016, 'VT'),
+('Hillary Clinton', 1742718, 2016, 'WA'),
 ('Hillary Clinton', 1382536, 2016, 'WI'),
 ('Hillary Clinton', 188794, 2016, 'WV'),
 ('Hillary Clinton', 55973, 2016, 'WY'),
@@ -1237,7 +1244,7 @@ INSERT INTO `results` (`candidate`, `popVotesReceived`, `electionYear`, `state`)
 ('Ross Perot', 348771, 1992, 'CT'),
 ('Ross Perot', 9681, 1992, 'DC'),
 ('Ross Perot', 59213, 1992, 'DE'),
-('Ross Perot', 798, 1992, 'FL'),
+('Ross Perot', 1053067, 1992, 'FL'),
 ('Ross Perot', 309657, 1992, 'GA'),
 ('Ross Perot', 53003, 1992, 'HI'),
 ('Ross Perot', 253468, 1992, 'IA'),
@@ -1278,6 +1285,7 @@ INSERT INTO `results` (`candidate`, `popVotesReceived`, `electionYear`, `state`)
 ('Ross Perot', 541801, 1992, 'WA'),
 ('Ross Perot', 544479, 1992, 'WI'),
 ('Ross Perot', 108829, 1992, 'WV'),
+('Ross Perot', 51263, 1992, 'WY'),
 ('Ross Perot', 26333, 1996, 'AK'),
 ('Ross Perot', 92149, 1996, 'AL'),
 ('Ross Perot', 69884, 1996, 'AR'),
