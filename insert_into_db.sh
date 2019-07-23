@@ -59,69 +59,69 @@ for RESULTFILES in $(ls)
 		stateName=${stateName^^}		# Capitalize the name of the state.
 		
 		# Will always send the overall election results to the database, regardless of what election year it is.
-		echo "INSERT INTO presidentialElections (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);"  # Display what is about to go to the db.
+		echo "INSERT INTO totalvotesbystate (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);"  # Display what is about to go to the db.
 		# Login to the database and insert.
 		
 		mysql -u root elections <<eof
-INSERT INTO presidentialElections (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);
+INSERT INTO totalvotesbystate (electionYear, state, electoralVotes, totalPopVotesCast) VALUES ($electionYear, '$stateName', $electoralVotes, $totalVotes);
 eof
 
 		
 		# The insert statements will differ based on which election year it is.
 		if [[ $electionYear == "1992" ]]; then 
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Bill Clinton', $popVotesC2, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('George Bush', $popVotesC1, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Ross Perot', $popVotesC3, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystatepercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Bill Clinton', $popVotesC2, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystatepercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('George Bush', $popVotesC1, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystatepercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Ross Perot', $popVotesC3, $electionYear, '$stateName');"
 			mysql -u root elections <<eof
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Bill Clinton', $popVotesC2, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('George Bush', $popVotesC1, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Ross Perot', $popVotesC3, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Bill Clinton', $popVotesC2, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('George Bush', $popVotesC1, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Ross Perot', $popVotesC3, $electionYear, '$stateName');
 eof
 		elif [[ $electionYear == "1996" ]]; then
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Bill Clinton', $popVotesC2, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('George Bush', $popVotesC1, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Ross Perot', $popVotesC3, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Bill Clinton', $popVotesC2, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('George Bush', $popVotesC1, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Ross Perot', $popVotesC3, $electionYear, '$stateName');"
 			mysql -u root elections <<eof
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Bill Clinton', $popVotesC1, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Bob Dole', $popVotesC2, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Ross Perot', $popVotesC3, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Bill Clinton', $popVotesC1, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Bob Dole', $popVotesC2, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Ross Perot', $popVotesC3, $electionYear, '$stateName');
 eof
 		elif [[ $electionYear == "2000" ]]; then
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Al Gore', $popVotesC2, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('George W. Bush', $popVotesC1, $electionYear, '$stateName');"				
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Al Gore', $popVotesC2, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('George W. Bush', $popVotesC1, $electionYear, '$stateName');"				
 			mysql -u root elections <<eof
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Al Gore', $popVotesC2, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('George W. Bush', $popVotesC1, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Al Gore', $popVotesC2, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('George W. Bush', $popVotesC1, $electionYear, '$stateName');
 eof
 		
 		elif [[ $electionYear == "2004" ]]; then
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('John Kerry', $popVotesC2, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('George W. Bush', $popVotesC1, $electionYear, '$stateName');"				
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('John Kerry', $popVotesC2, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('George W. Bush', $popVotesC1, $electionYear, '$stateName');"				
 			mysql -u root elections <<eof
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('John Kerry', $popVotesC2, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('George W. Bush', $popVotesC1, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('John Kerry', $popVotesC2, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('George W. Bush', $popVotesC1, $electionYear, '$stateName');
 eof
 		
 		elif [[ $electionYear == "2008" ]]; then
-			echo "INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('John McCain', $popVotesC2, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Barack Obama', $popVotesC1, $electionYear, '$stateName');"				
+			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('John McCain', $popVotesC2, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Barack Obama', $popVotesC1, $electionYear, '$stateName');"				
 			mysql -u root elections <<eof
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('John McCain', $popVotesC2, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Barack Obama', $popVotesC1, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('John McCain', $popVotesC2, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Barack Obama', $popVotesC1, $electionYear, '$stateName');
 eof
 		elif [[ $electionYear == "2012" ]]; then
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Mitt Romney', $popVotesC2, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Barack Obama', $popVotesC1, $electionYear, '$stateName');"				
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Mitt Romney', $popVotesC2, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Barack Obama', $popVotesC1, $electionYear, '$stateName');"				
 			mysql -u root elections <<eof
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Mitt Romney', $popVotesC2, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Barack Obama', $popVotesC1, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Mitt Romney', $popVotesC2, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Barack Obama', $popVotesC1, $electionYear, '$stateName');
 eof
 		elif [[ $electionYear == "2016" ]]; then
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Hillary Clinton', $popVotesC2, $electionYear, '$stateName');"
-			echo "INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Donald Trump', $popVotesC1, $electionYear, '$stateName');"				
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Hillary Clinton', $popVotesC2, $electionYear, '$stateName');"
+			echo "INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Donald Trump', $popVotesC1, $electionYear, '$stateName');"				
 			mysql -u root elections <<eof
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Hillary Clinton', $popVotesC2, $electionYear, '$stateName');
-INSERT INTO results (candidate, popVotesReceived, electionYear, state) VALUES ('Donald Trump', $popVotesC1, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Hillary Clinton', $popVotesC2, $electionYear, '$stateName');
+INSERT INTO resultspercandidatebystate (candidate, popVotesReceived, electionYear, state) VALUES ('Donald Trump', $popVotesC1, $electionYear, '$stateName');
 eof
 		fi
 				
