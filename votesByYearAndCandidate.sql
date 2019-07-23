@@ -4,7 +4,7 @@ SELECT
     FORMAT(SUM(popVotesReceived),
     0)
 FROM
-    results
+    resultspercandidatebystate
 WHERE
     LENGTH(state) = 2
 GROUP BY
