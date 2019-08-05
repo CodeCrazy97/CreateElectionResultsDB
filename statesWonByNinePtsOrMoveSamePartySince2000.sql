@@ -30,8 +30,7 @@ CREATE PROCEDURE elections.fetchNinePointResults (IN blah varchar(4000))
 BEGIN
 -- Cursor to hold results
 DECLARE v_finished INTEGER DEFAULT 0;
-DECLARE v_email varchar(100) DEFAULT "";
-DECLARE stateName2 varchar(30) DEFAULT "ZZ";
+DECLARE stateName varchar(30) DEFAULT "ZZ";
 DECLARE percentage double DEFAULT 0.0;
 DECLARE candidateName varchar(30) DEFAULT "XXX";
  
@@ -50,8 +49,8 @@ DECLARE CONTINUE HANDLER
 OPEN percentageResults;
 
 results: LOOP
- FETCH percentageResults INTO stateName2, percentage, candidateName;
- SELECT stateName2, percentage, candidateName;
+ FETCH percentageResults INTO stateName, percentage, candidateName;
+ SELECT stateName, percentage, candidateName;
  IF v_finished = 1 THEN 
 	LEAVE results;
  END IF;
